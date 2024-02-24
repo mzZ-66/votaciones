@@ -3,14 +3,16 @@ package Modelo;
 public class Votaciones {
     private int id;
     private int circunscripcion;
-    private int fechaVotaciones;
-    private boolean estado;
+    private String fechaInicio;
+    private String fechaFin;
+    private boolean abiertas;
 
-    public Votaciones(int id, int circunscripcion, int fechaVotaciones, boolean estado) {
+    public Votaciones(int id, int circunscripcion, String fechaInicio, String fechaFin, boolean abiertas) {
         this.id = id;
         this.circunscripcion = circunscripcion;
-        this.fechaVotaciones = fechaVotaciones;
-        this.estado = estado;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.abiertas = abiertas;
     }
 
     public int getId() {
@@ -27,18 +29,25 @@ public class Votaciones {
         this.circunscripcion = circunscripcion;
     }
 
-    public int getFechaVotaciones() {
-        return fechaVotaciones;
+    public String getFechaInicio() {
+        return fechaInicio;
     }
-    public void setFechaVotaciones(int fechaVotaciones) {
-        this.fechaVotaciones = fechaVotaciones;
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public String getFechaFin() {
+        return fechaFin;
     }
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public boolean isAbiertas() {
+        return abiertas;
+    }
+    public void setAbiertas(boolean abiertas) {
+        this.abiertas = abiertas;
     }
 
     @Override
@@ -46,8 +55,9 @@ public class Votaciones {
         return "Votaciones{" +
                 "id=" + id +
                 ", circunscripcion=" + circunscripcion +
-                ", fechaVotaciones=" + fechaVotaciones +
-                ", estado=" + estado +
+                ", fechaInicio=" + fechaInicio +
+                ", fechaFin=" + fechaFin +
+                ", abiertas=" + abiertas +
                 '}';
     }
 }

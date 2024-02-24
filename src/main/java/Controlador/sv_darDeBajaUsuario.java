@@ -8,8 +8,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "sv_login", value = "/sv_login")
-public class sv_login extends HttpServlet {
+@WebServlet(name = "sv_darDeBajaUsuario", value = "/sv_darDeBajaUsuario")
+public class sv_darDeBajaUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -17,14 +17,13 @@ public class sv_login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String dni = request.getParameter("dni");
-        String password = request.getParameter("password");
-
         try {
             OperacionesUsuario operacionesUsuario = new OperacionesUsuario();
-            Usuario usuario = operacionesUsuario.loginUsuario(dni, password);
-            request.getSession().setAttribute("usuario", usuario);
-            response.sendRedirect("menu.jsp");
+            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+            operacionesUsuario.darDeBajaUsuario(usuario.getDni());
+            request.getSession().removeAttribute("usuario");
+
+            response.sendRedirect("genericSuccess.jsp" + "?mensaje=Te has dado de baja. Tu sesión se ha cerrado.");
         } catch (Exception e) {
             response.sendRedirect("genericError.jsp" + "?mensaje=" + e.getMessage());
         }

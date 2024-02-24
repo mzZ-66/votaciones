@@ -1,15 +1,15 @@
 package Controlador;
 
 import DAO.OperacionesUsuario;
-import Modelo.*;
+import Modelo.Usuario;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "sv_registro", value = "/sv_registro")
-public class sv_registro extends HttpServlet {
+@WebServlet(name = "sv_modificarDatosUsuario", value = "/sv_modificarDatosUsuario")
+public class sv_modificarDatosUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -17,20 +17,19 @@ public class sv_registro extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String dni = request.getParameter("dni");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
         String password = request.getParameter("password");
         String nombreCompleto = request.getParameter("nombreCompleto");
         String fechaNac = request.getParameter("fechaNac");
         String domicilio = request.getParameter("domicilio");
-        Usuario.TipoUsuario tipoUsuario = Usuario.TipoUsuario.valueOf(request.getParameter("tipoUsuario"));
         int circunscripcion = Integer.parseInt(request.getParameter("circunscripcion"));
-        boolean activo = true;
 
-        Usuario usuario = new Usuario(dni, password, nombreCompleto, fechaNac, domicilio, tipoUsuario, circunscripcion, activo);
+        Usuario usuarioActualizado = new Usuario(usuario.getDni(), password, nombreCompleto, fechaNac, domicilio, usuario.getTipoUsuario(), circunscripcion, usuario.isActivo());
         try {
             OperacionesUsuario operacionesUsuario = new OperacionesUsuario();
-            operacionesUsuario.registrarUsuario(usuario);
-            response.sendRedirect("genericSuccess.jsp" + "?mensaje=Te has registrado correctamente. Ahora puedes iniciar sesión.");
+            operacionesUsuario.modificarUsuario(usuarioActualizado, usuario.getDni());
+            response.sendRedirect("genericSuccess.jsp" + "?mensaje=Datos modificados correctamente. Vuelve a iniciar sesión.");
         } catch (Exception e) {
             response.sendRedirect("genericError.jsp" + "?mensaje=" + e.getMessage());
         }

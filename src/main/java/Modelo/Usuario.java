@@ -14,6 +14,8 @@ public class Usuario {
         Votante, Admin
     }
 
+    public Usuario() {}
+
     public Usuario(String dni, String password, String nombreCompleto, String fechaNac, String domicilio, TipoUsuario tipoUsuario, int circunscripcion, boolean activo) {
         this.dni = dni;
         this.password = password;
