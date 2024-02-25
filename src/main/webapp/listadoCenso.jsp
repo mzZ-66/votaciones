@@ -16,7 +16,7 @@
         OperacionesUsuario operacionesUsuario = new OperacionesUsuario();
         usuarios = operacionesUsuario.obtenerUsuarios();
     } catch (SQLException e) {
-        response.sendRedirect("error.jsp?mensaje=" + e.getMessage());
+        response.sendRedirect("genericError.jsp?mensaje=" + e.getMessage());
     }
 %>
 <html>

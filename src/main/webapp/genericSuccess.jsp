@@ -20,7 +20,7 @@
         <p>
             <%= request.getParameter("mensaje") %>
         </p>
-        <a href="index.jsp"><button>Volver al menú</button></a>
+        <a href="menu.jsp"><button>Volver</button></a>
     </div>
 </body>
 </html>

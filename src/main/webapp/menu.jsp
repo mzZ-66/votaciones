@@ -31,10 +31,10 @@
         <form action="crearVotaciones.jsp" method="post">
             <button type="submit">Crear votación</button>
         </form>
-        <form action="abrirCerrarEscrutinio" method="post">
+        <form action="abrirCerrarEscrutinio.jsp" method="post"> <!-- TODO: Añadir que se cierren automáticamente si llega la fechaFin -->
             <button type="submit">Abrir / cerrar escrutinio</button>
         </form>
-        <form action="verResultados" method="post">
+        <form action="seleccionarVotaciones.jsp" method="post"> <!-- TODO: Solo se pueden ver si el escrutinio está cerrado, y solo se muestran las últimas votaciones -->
             <button type="submit">Ver resultados de votación</button>
         </form>
     </div>
@@ -47,10 +47,10 @@
         <form action="modificarDatosUsuario.jsp" method="post"> <!-- TODO: Solo se debe hacer si el escrutinio está cerrado -->
             <button type="submit">Modificar datos</button>
         </form>
-        <form action="votar" method="post">
+        <form action="votar.jsp" method="post">
             <button type="submit">Votar</button>
         </form>
-        <form action="verResultados" method="post">
+        <form action="" method="post">
             <button type="submit">Ver resultados de votación</button>
         </form>
     </div>

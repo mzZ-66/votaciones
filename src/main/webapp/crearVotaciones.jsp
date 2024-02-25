@@ -41,6 +41,7 @@
 
             <input type="submit" value="Crear">
         </form>
+        <a href="menu.jsp"><button>Volver al menú</button></a>
     </div>
 </body>
 </html>
