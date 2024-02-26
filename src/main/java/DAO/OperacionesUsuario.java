@@ -121,4 +121,16 @@ public class OperacionesUsuario {
         return usuarios;
     }
 
+    public boolean haVotado(String dni) throws SQLException {
+        String sql = "SELECT * FROM voto WHERE votante = ?";
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ps.setString(1, dni);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

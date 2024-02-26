@@ -42,6 +42,7 @@
         </select>
         <input type="submit" value="Guardar cambios">
     </form>
+    <a href="menu.jsp"><button>Volver al menú</button></a>
 </div>
 </body>
 </html>

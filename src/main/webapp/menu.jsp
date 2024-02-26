@@ -37,6 +37,9 @@
         <form action="seleccionarVotaciones.jsp" method="post"> <!-- TODO: Solo se pueden ver si el escrutinio está cerrado, y solo se muestran las últimas votaciones -->
             <button type="submit">Ver resultados de votación</button>
         </form>
+        <form action="sv_cerrarSesion" method="post">
+            <button class="rojo" type="submit">Cerrar sesión</button>
+        </form>
     </div>
     <% } else if (tipoUsuario == Usuario.TipoUsuario.Votante) { %>
     <div class="container">
@@ -52,6 +55,9 @@
         </form>
         <form action="" method="post">
             <button type="submit">Ver resultados de votación</button>
+        </form>
+        <form action="sv_cerrarSesion" method="post">
+            <button class="rojo" type="submit">Cerrar sesión</button>
         </form>
     </div>
     <% } %>

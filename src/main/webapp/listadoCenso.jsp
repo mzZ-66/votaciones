@@ -29,7 +29,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Lista de Votantes</h1>
+    <h1>Listado del Censo</h1>
     <table>
         <tr>
             <th>DNI</th>
@@ -38,9 +38,13 @@
             <th>Domicilio</th>
             <th>Tipo de Usuario</th>
             <th>Circunscripción</th>
-            <th>Activo</th>
+            <th>¿Activo?</th>
+            <th>¿Ha votado?</th>
         </tr>
-        <% for (Usuario usuario : usuarios) { %>
+        <% for (Usuario usuario : usuarios) {
+            OperacionesUsuario operacionesUsuario = new OperacionesUsuario();
+            boolean haVotado = operacionesUsuario.haVotado(usuario.getDni());
+        %>
         <tr>
             <td><%= usuario.getDni() %></td>
             <td><%= usuario.getNombreCompleto() %></td>
@@ -49,6 +53,7 @@
             <td><%= usuario.getTipoUsuario() %></td>
             <td><%= usuario.getCircunscripcion() %></td>
             <td><%= usuario.isActivo() %></td>
+            <td><%= haVotado %></td>
         </tr>
         <% } %>
     </table>
