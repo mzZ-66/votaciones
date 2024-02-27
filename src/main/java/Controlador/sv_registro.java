@@ -1,6 +1,7 @@
 package Controlador;
 
 import DAO.OperacionesUsuario;
+import DAO.OperacionesVotaciones;
 import Modelo.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -28,9 +29,14 @@ public class sv_registro extends HttpServlet {
 
         Usuario usuario = new Usuario(dni, password, nombreCompleto, fechaNac, domicilio, tipoUsuario, circunscripcion, activo);
         try {
-            OperacionesUsuario operacionesUsuario = new OperacionesUsuario();
-            operacionesUsuario.registrarUsuario(usuario);
-            response.sendRedirect("genericSuccess.jsp" + "?mensaje=Te has registrado correctamente. Ahora puedes iniciar sesión.");
+            OperacionesVotaciones operacionesVotaciones = new OperacionesVotaciones();
+            if (!operacionesVotaciones.existeVotacionAbierta()) {
+                OperacionesUsuario operacionesUsuario = new OperacionesUsuario();
+                operacionesUsuario.registrarUsuario(usuario);
+                response.sendRedirect("genericSuccess.jsp" + "?mensaje=Te has registrado correctamente. Ahora puedes iniciar sesión.");
+            } else {
+                response.sendRedirect("genericError.jsp" + "?mensaje=No puedes registrarte porque se están celebrando unas votaciones.");
+            }
         } catch (Exception e) {
             response.sendRedirect("genericError.jsp" + "?mensaje=" + e.getMessage());
         }
