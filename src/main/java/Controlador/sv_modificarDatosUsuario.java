@@ -1,6 +1,7 @@
 package Controlador;
 
 import DAO.OperacionesUsuario;
+import DAO.OperacionesVotaciones;
 import Modelo.Usuario;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -27,9 +28,15 @@ public class sv_modificarDatosUsuario extends HttpServlet {
 
         Usuario usuarioActualizado = new Usuario(usuario.getDni(), password, nombreCompleto, fechaNac, domicilio, usuario.getTipoUsuario(), circunscripcion, usuario.isActivo());
         try {
-            OperacionesUsuario operacionesUsuario = new OperacionesUsuario();
-            operacionesUsuario.modificarUsuario(usuarioActualizado, usuario.getDni());
-            response.sendRedirect("genericSuccess.jsp" + "?mensaje=Datos modificados correctamente. Vuelve a iniciar sesión.");
+            OperacionesVotaciones operacionesVotaciones = new OperacionesVotaciones();
+            if (!operacionesVotaciones.existeVotacionAbierta()) {
+                OperacionesUsuario operacionesUsuario = new OperacionesUsuario();
+                operacionesUsuario.modificarUsuario(usuarioActualizado, usuario.getDni());
+                request.getSession().removeAttribute("usuario"); // le cierro la sesión para que la inicie otra vez y los datos de sesión sean correctos.
+                response.sendRedirect("genericSuccess.jsp" + "?mensaje=Datos modificados correctamente. Vuelve a iniciar sesión.");
+            } else {
+                response.sendRedirect("genericError.jsp" + "?mensaje=Hay unas votaciones en curso. No puedes modificar tus datos hasta que acaben.");
+            }
         } catch (Exception e) {
             response.sendRedirect("genericError.jsp" + "?mensaje=" + e.getMessage());
         }

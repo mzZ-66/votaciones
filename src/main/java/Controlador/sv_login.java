@@ -20,10 +20,19 @@ public class sv_login extends HttpServlet {
         String dni = request.getParameter("dni");
         String password = request.getParameter("password");
 
+
+
         try {
             OperacionesUsuario operacionesUsuario = new OperacionesUsuario();
             Usuario usuario = operacionesUsuario.loginUsuario(dni, password);
             request.getSession().setAttribute("usuario", usuario);
+
+            // creo la cookie con el nombre del usuario
+            String nombreCompleto = usuario.getNombreCompleto().replace(" ", "_");
+            Cookie nombreUsuario = new Cookie("nombreUsuario", nombreCompleto); // creo la cookie
+            nombreUsuario.setMaxAge(360000000); // la hago expirar
+            response.addCookie(nombreUsuario); // la agrego a la respuesta
+
             response.sendRedirect("menu.jsp");
         } catch (Exception e) {
             response.sendRedirect("genericError.jsp" + "?mensaje=" + e.getMessage());

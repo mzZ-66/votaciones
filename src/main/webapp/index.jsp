@@ -26,14 +26,6 @@
                 <input type="date" name="fechaNac" required>
             </div>
             <input type="text" name="domicilio" placeholder="Domicilio" required><br>
-            <label>¿Qué tipo de usuario eres?<br>
-                <label>Votante
-                    <input type="radio" name="tipoUsuario" value="Votante" checked>
-                </label><br>
-                <label>Admin.
-                    <input type="radio" name="tipoUsuario" value="Admin">
-                </label>
-            </label><br>
             <label>¿A qué circunscripción perteneces?<br>
                 <select name="circunscripcion" required>
                     <option value="" selected disabled>Localidad, Provincia</option>

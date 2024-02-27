@@ -1,8 +1,17 @@
 <%@ page import="DAO.OperacionesPartido" %>
 <%@ page import="Modelo.Partido" %>
 <%@ page import="java.util.List" %>
+<%@ page import="DAO.OperacionesVotaciones" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    try {
+        OperacionesVotaciones operacionesVotaciones = new OperacionesVotaciones();
+        if (!operacionesVotaciones.existeVotacionAbierta()) {
+            response.sendRedirect("genericError.jsp" + "?mensaje=No hay ningunas votaciones en curso.");
+        }
+    } catch (Exception e) {
+        response.sendRedirect("genericError.jsp?mensaje" + e.getMessage());
+    }
     OperacionesPartido operacionesPartido = new OperacionesPartido();
     List<Partido> partidos = operacionesPartido.obtenerPartidos();
 %>

@@ -10,11 +10,17 @@
 <%@ page import="java.util.List" %>
 <%@ page import="DAO.OperacionesUsuario" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="DAO.OperacionesCircunscripcion" %>
+<%@ page import="Modelo.Circunscripcion" %>
 <%
     List<Usuario> usuarios = null;
+    List<Circunscripcion> circunscripciones = null;
     try {
         OperacionesUsuario operacionesUsuario = new OperacionesUsuario();
         usuarios = operacionesUsuario.obtenerUsuarios();
+
+        OperacionesCircunscripcion operacionesCircunscripcion = new OperacionesCircunscripcion();
+        circunscripciones = operacionesCircunscripcion.obtenerCircunscripcion();
     } catch (SQLException e) {
         response.sendRedirect("genericError.jsp?mensaje=" + e.getMessage());
     }
@@ -51,7 +57,15 @@
             <td><%= usuario.getFechaNac() %></td>
             <td><%= usuario.getDomicilio() %></td>
             <td><%= usuario.getTipoUsuario() %></td>
-            <td><%= usuario.getCircunscripcion() %></td>
+            <td><%
+                String nombreCircunscripcion = null;
+                for (Circunscripcion circunscripcion : circunscripciones) {
+                    if (circunscripcion.getId() == usuario.getCircunscripcion()) {
+                        nombreCircunscripcion = circunscripcion.getLocalidad();
+                    }
+                }
+            %>
+            <%= nombreCircunscripcion %></td>
             <td><%= usuario.isActivo() %></td>
             <td><%= haVotado %></td>
         </tr>

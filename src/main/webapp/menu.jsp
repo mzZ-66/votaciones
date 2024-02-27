@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="Modelo.Usuario" %>
 <%
+    // con esto puedo comprobar que el usuario está autenticado, y si no lo está, lo redirijo al login desde el catch
     try {
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         Usuario.TipoUsuario tipoUsuario = usuario.getTipoUsuario();
@@ -25,17 +26,17 @@
     <% if (tipoUsuario == Usuario.TipoUsuario.Admin) { %>
     <div class="container">
         <h2>Menú de Administrador</h2>
-        <form action="listadoCenso.jsp" method="post"> <!-- TODO: Añadir en la tabla si el usuario ha votado o no -->
+        <form action="listadoCenso.jsp" method="post">
             <button type="submit">Ver listado del censo</button>
         </form>
         <form action="crearVotaciones.jsp" method="post">
             <button type="submit">Crear votación</button>
         </form>
-        <form action="abrirCerrarEscrutinio.jsp" method="post"> <!-- TODO: Añadir que se cierren automáticamente si llega la fechaFin -->
+        <form action="abrirCerrarEscrutinio.jsp" method="post">
             <button type="submit">Abrir / cerrar escrutinio</button>
         </form>
-        <form action="seleccionarVotaciones.jsp" method="post"> <!-- TODO: Solo se pueden ver si el escrutinio está cerrado, y solo se muestran las últimas votaciones -->
-            <button type="submit">Ver resultados de votación</button>
+        <form action="seleccionarVotaciones.jsp" method="post">
+            <button type="submit">Ver resultados de votaciones</button>
         </form>
         <form action="sv_cerrarSesion" method="post">
             <button class="rojo" type="submit">Cerrar sesión</button>
@@ -44,17 +45,17 @@
     <% } else if (tipoUsuario == Usuario.TipoUsuario.Votante) { %>
     <div class="container">
         <h2>Menú de Votante</h2>
-        <form action="sv_darDeBajaUsuario" method="post"> <!-- TODO: Solo se debe hacer si el escrutinio está cerrado -->
+        <form action="sv_darDeBajaUsuario" method="post">
             <button type="submit">Darse de baja</button>
         </form>
-        <form action="modificarDatosUsuario.jsp" method="post"> <!-- TODO: Solo se debe hacer si el escrutinio está cerrado -->
+        <form action="modificarDatosUsuario.jsp" method="post">
             <button type="submit">Modificar datos</button>
         </form>
         <form action="votar.jsp" method="post">
             <button type="submit">Votar</button>
         </form>
-        <form action="" method="post">
-            <button type="submit">Ver resultados de votación</button>
+        <form action="seleccionarVotaciones.jsp" method="post">
+            <button type="submit">Ver resultados de votaciones</button>
         </form>
         <form action="sv_cerrarSesion" method="post">
             <button class="rojo" type="submit">Cerrar sesión</button>

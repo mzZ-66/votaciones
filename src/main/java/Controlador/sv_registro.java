@@ -22,7 +22,7 @@ public class sv_registro extends HttpServlet {
         String nombreCompleto = request.getParameter("nombreCompleto");
         String fechaNac = request.getParameter("fechaNac");
         String domicilio = request.getParameter("domicilio");
-        Usuario.TipoUsuario tipoUsuario = Usuario.TipoUsuario.valueOf(request.getParameter("tipoUsuario"));
+        Usuario.TipoUsuario tipoUsuario = Usuario.TipoUsuario.Votante;
         int circunscripcion = Integer.parseInt(request.getParameter("circunscripcion"));
         boolean activo = true;
 

@@ -5,6 +5,9 @@
 <%
     OperacionesVotaciones operacionesVotaciones = new OperacionesVotaciones();
     List<Votaciones> votaciones = operacionesVotaciones.obtenerVotaciones();
+    if (votaciones.isEmpty()) {
+        response.sendRedirect("genericError.jsp?mensaje=Todavía no han habido ningunas votaciones.");
+    }
 %>
 <html>
 <head>
