@@ -1,5 +1,6 @@
 package Controlador;
 
+import DAO.OperacionesCircunscripcion;
 import DAO.OperacionesUsuario;
 import Modelo.Usuario;
 import jakarta.servlet.*;
@@ -32,6 +33,14 @@ public class sv_login extends HttpServlet {
             Cookie nombreUsuario = new Cookie("nombreUsuario", nombreCompleto); // creo la cookie
             nombreUsuario.setMaxAge(360000000); // la hago expirar
             response.addCookie(nombreUsuario); // la agrego a la respuesta
+
+            // creo la cookie con la localidad del usuario
+            OperacionesCircunscripcion operacionesCircunscripcion = new OperacionesCircunscripcion();
+            String localidad = operacionesCircunscripcion.obtenerLocalidad(usuario.getCircunscripcion());
+            String localidadLimpia = localidad.replace(" ", "_");
+            Cookie localidadUsuario = new Cookie("localidadUsuario", localidadLimpia); // creo la cookie
+            nombreUsuario.setMaxAge(360000000); // la hago expirar
+            response.addCookie(localidadUsuario); // la agrego a la respuesta
 
             response.sendRedirect("menu.jsp");
         } catch (Exception e) {

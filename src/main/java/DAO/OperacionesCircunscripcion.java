@@ -32,4 +32,18 @@ public class OperacionesCircunscripcion {
         consulta.close();
         return circunscripciones;
     }
+
+    public String obtenerLocalidad(int id) throws SQLException {
+        String localidad = "";
+        String query = "SELECT localidad FROM circunscripcion WHERE id = ?";
+        PreparedStatement consulta = conexion.prepareStatement(query);
+        consulta.setInt(1, id);
+        ResultSet rs = consulta.executeQuery();
+        if (rs.next()) {
+            localidad = rs.getString("localidad");
+        }
+        rs.close();
+        consulta.close();
+        return localidad;
+    }
 }

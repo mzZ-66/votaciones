@@ -18,19 +18,23 @@ public class sv_cerrarSesion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-        // pido la cookie con el nombre del usuario
+        // obtengo las dos cookies
         Cookie cookies[] = request.getCookies();
         String nombreUsuarioValor = "";
+        String localidadUsuarioValor = "";
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("nombreUsuario")) {
                 nombreUsuarioValor = cookie.getValue();
                 cookie.setMaxAge(0);
-                break;
+            }
+            if (cookie.getName().equals("localidadUsuario")) {
+                localidadUsuarioValor = cookie.getValue();
+                cookie.setMaxAge(0);
             }
         }
         if (!nombreUsuarioValor.isEmpty()) {
             request.getSession().removeAttribute("usuario");
-            response.sendRedirect("genericSuccess.jsp" + "?mensaje=Hasta luego, " + nombreUsuarioValor + ". Has cerrado sesión.");
+            response.sendRedirect("genericSuccess.jsp" + "?mensaje=Hasta luego, " + nombreUsuarioValor + ", de " + localidadUsuarioValor + ". Has cerrado sesión.");
         }
     }
 }
